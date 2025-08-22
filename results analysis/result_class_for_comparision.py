@@ -130,7 +130,7 @@ class Results_NASA:
         end = 0
         for i in range(len(local_minima)):
             end = local_minima[i]
-            if end <= start:  # 🔒 skip invalid range
+            if end <= start: 
                 continue
             pred_i = pred_label[start:end]
             true_i = true_label[start:end]

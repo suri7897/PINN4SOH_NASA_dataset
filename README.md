@@ -46,11 +46,8 @@ To run the model, follow these steps:
 ## **3. Implementation Guide**
   ### 1) Data preprocessing
   Since the NASA Battery Dataset provides full cycle data along with measurements of voltage, current, and time, additional preprocessing is required to make it compatible with the model.
-  To do preprocessing, run `data_splitter.py`.
-   ```
-   cd data_processing
-   python3 data_splitter.py
-   ```
+  To do preprocessing, run `data_splitter.ipynb`.
+
   ### 2) Train Model
   To train PINN model with **NASA dataset**, run `main_NASA.py`.
   ```bash
@@ -95,6 +92,7 @@ To run the model, follow these steps:
 ### 1) NASA battery dataset
   This project uses the NASA lithium-ion battery dataset from the Prognostics Data.  
   It contains charge/discharge cycle data and is commonly used for battery degradation and State of Health (SOH) prediction.
+  Here, I used only charging data to keep the method in original paper.
   
   - Data available on https://www.kaggle.com/datasets/patrickfleith/nasa-battery-dataset.
 
