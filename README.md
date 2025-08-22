@@ -90,7 +90,7 @@ To run the model, follow these steps:
   ### 4) Plotter
   The figures in the paper, including those based on the NASA dataset, can be generated in the `plotter` folder.
 
-## **4. Dataset**
+# **Dataset**
 
 ### 1) NASA battery dataset
   This project uses the NASA lithium-ion battery dataset from the Prognostics Data.  
