@@ -27,8 +27,8 @@ To run the model, follow these steps:
 
 ## **1. Clone the Repository**
    ```bash
-   git clone https://github.com/suri7897/PINN_for_SOH_NASA_dataset.git
-   cd PINN_for_SOH_NASA_dataset
+   git clone https://github.com/suri7897/PINN4SOH_NASA_dataset.git
+   cd PINN4SOH_NASA_dataset
    ```
 
 ## **2. Setup Conda environment**  
@@ -54,7 +54,7 @@ To run the model, follow these steps:
   ### 2) Train Model
   To train PINN model with **NASA dataset**, run `main_NASA.py`.
   ```bash
-  # Working Directory = /PINN_for_SOH_NASA_dataset
+  # Working Directory = /PINN4SOH_NASA_dataset
    python3 main_NASA.py
    ```
   If you want to train PINN model with **XJTU dataset**, run `main_XJTU.py`.
