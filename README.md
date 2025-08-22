@@ -45,7 +45,9 @@ To run the model, follow these steps:
 
 ## **3. Implementation Guide**
   ### 1) Data preprocessing
-  Since the NASA Battery Dataset provides full cycle data along with measurements of voltage, current, and time, additional preprocessing is required to make it compatible with the model.
+  Since the NASA Battery Dataset provides full cycle data along with measurements of voltage, current, and time, additional preprocessing is required to make it compatible with the model.  
+  This repository already contains the processed NASA battery dataset, so preprocessing is actually not required for implementation.  
+
   To do preprocessing, run `data_splitter.ipynb`.
 
   ### 2) Train Model
