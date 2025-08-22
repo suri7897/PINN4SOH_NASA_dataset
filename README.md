@@ -40,7 +40,7 @@ To run the model, follow these steps:
    Then, Install Dependencies.
    ```bash
    conda install pytorch=2.4.0
-   pip install scikit-learn numpy matplotlib pandas scienceplots glob
+   pip install scikit-learn numpy matplotlib pandas scienceplots
    ```
 
 ## **3. Implementation Guide**
