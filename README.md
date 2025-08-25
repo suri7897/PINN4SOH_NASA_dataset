@@ -88,6 +88,8 @@ To run the model, follow these steps:
    
   ### 4) Plotter
   The figures in the paper, including those based on the NASA dataset, can be generated in the `plotter` folder.
+  You can see the actual results of this codes in `plotter`.
+  For more information, refer to `README.md` in `plotter` folder.
 
 # **Dataset**
 
