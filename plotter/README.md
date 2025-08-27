@@ -22,6 +22,9 @@ python3 Figure\ 4b.py --CNN=False
 
 # Result
 
+>[!NOTE]
+> The Figure of NASA dataset with **`dqdv` index** is omitted in this README.md file, and these could be found in `dqdv_figures` folder.
+
 ### Figure 2 
 > **The degradation trajectories of battery dataset.**
 
@@ -64,13 +67,13 @@ numbers 1–16 represent 16 features.**
 ### Figure 4a
 > The SOH estimation results of proposed PINN on four datasets. The predicted and true SOH are distributed near the diagonal, indicating that the model performs well.
 
-<img width="1394" height="977" alt="Figure 4a" src="https://github.com/user-attachments/assets/7f5b18e7-461b-4d98-affb-80f434022c02" />  
+<img width="1394" height="977" alt="Figure 4a" src="https://github.com/user-attachments/assets/7f5b18e7-461b-4d98-affb-80f434022c02" /> 
 
 **[Figure 4a | Original figure]**  
 
  <br>
 
-<img width="1162" height="886" alt="Figure 4a_with NASA" src="https://github.com/user-attachments/assets/2b24926e-770f-4360-807e-ccbaa10f96c2" />  
+<img width="1162" height="886" alt="Figure 4a_with_NASA" src="https://github.com/user-attachments/assets/02cfc961-518c-4929-90e0-4291ca00d3ac" />
 
 **[Figure 4a | Reproduced figure with NASA data]** 
 
@@ -89,12 +92,12 @@ numbers 1–16 represent 16 features.**
 
 <img width="1817" height="1058" alt="Figure 4b_with NASA" src="https://github.com/user-attachments/assets/085d85a6-f55d-4644-a41e-367aa70a8027" />
 
-**[Figure 4a | Reproduced figure with NASA data]** 
+**[Figure 4b | Reproduced figure with NASA data]** 
 
  <br>
 
 <img width="1817" height="1058" alt="Figure 4b_wo CNN_with NASA" src="https://github.com/user-attachments/assets/5161cb20-35f7-470e-9ffb-0385a0c66d72" />
 
-**[Figure 4a | Reproduced figure without CNN data]** 
+**[Figure 4b | Reproduced figure without CNN data]** 
 
  <br>

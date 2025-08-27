@@ -13,7 +13,13 @@ def plotter(corr_mat, dataset, savedir):
 
         cell_in = 0.40           # length of correlation sqaure box
         gap_in  = 0.10           # length of gap between each correlation boxes
-        left_pad, right_pad = 0.60, 0.25     # outer edge padding
+        if dataset == 'NASA_dqdv':
+            left_pad = 1.3
+        elif dataset == 'NASA':
+            left_pad = 0.85
+        else :
+            left_pad = 0.7
+        right_pad = 0.25     # outer edge padding
         top_pad,  bottom_pad = 0.35, 0.55
 
         group_label = dataset # labeling
@@ -85,7 +91,8 @@ if __name__ == "__main__":
     savedir = './figures/Figure 3b'
     os.makedirs(savedir, exist_ok = True)
 
-    for data in ['NASA','TJU','MIT','HUST', 'XJTU']:
+    # for data in ['NASA_dqdv']:
+    for data in ['NASA','NASA_dqdv','TJU','MIT','HUST', 'XJTU']:
         all_corr_rows = []
         dataset_name = data
 
@@ -93,7 +100,7 @@ if __name__ == "__main__":
             batches = ['2C', '3C', 'R2.5', 'R3', 'RW', 'satellite']
         elif data == 'TJU':
             batches = ['Dataset_1_NCA_battery','Dataset_2_NCM_battery','Dataset_3_NCM_NCA_battery']
-        elif data == 'NASA':
+        elif data in ['NASA', 'NASA_dqdv']:
             batches = ['Dataset_05_06_07_18', 'Dataset_25_26_27_28', 'Dataset_29_30_31_32', 'Dataset_33_34_36', 'Dataset_38_39_40',
                     'Dataset_41_42_43_44', 'Dataset_45_46_47_48', 'Dataset_49_50_51_52', 'Dataset_53_54_55_56']
         elif data == 'MIT':
@@ -102,7 +109,7 @@ if __name__ == "__main__":
             batches = [0]
         data_dir = os.path.join(data_root, f"{data} data")
         for batch in batches:
-            if data in ['TJU', 'NASA']:
+            if data in ['TJU', 'NASA','NASA_dqdv']:
                 batch_dir = os.path.join(data_dir, batch)
                 batch_files = glob.glob(os.path.join(batch_dir,"*.csv")) # get batch files
             elif data in ["MIT"]:

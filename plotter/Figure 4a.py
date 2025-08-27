@@ -78,7 +78,7 @@ with plt.rc_context({'text.usetex': False}):
 
             ax.set_xticks([0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1])
             ax.set_yticks([0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1])
-            if data in ["XJTU", "TJU", "MIT", "MIT"]:
+            if data in ["XJTU", "TJU", "MIT", "HUST"]:
                 lim = lims[data]
             else :
                 if batch in [7,8,9]:
@@ -86,8 +86,8 @@ with plt.rc_context({'text.usetex': False}):
                 else:
                     lim = lims["NASA_2"]
 
-            ax.set_xlim(lims[data])
-            ax.set_ylim(lims[data])
+            ax.set_xlim(lim)
+            ax.set_ylim(lim)
             #plt.suptitle(title)
             #(set the title of each subplot)
             ax.set_title(title)

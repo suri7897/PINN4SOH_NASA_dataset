@@ -17,6 +17,12 @@ from matplotlib.ticker import FixedLocator
 import os
 import argparse
 
+# add a percentage sign on the top of the y-axis
+def percentage(x, pos):
+    if x >= 0.2:
+        return '{:.0f}%'.format(x * 100)
+    else:
+        return '{:.1f}%'.format(x * 100)
 
 def get_cnn():
     p = argparse.ArgumentParser()
@@ -113,14 +119,6 @@ if __name__ == '__main__':
                     # set the y-axis range
 
                     # ax.set_ylim(0, 0.055)
-
-                    # add a percentage sign on the top of the y-axis
-                    def percentage(x, pos):
-                        if x >= 0.2:
-                            return '{:.0f}%'.format(x * 100)
-                        else:
-                            return '{:.1f}%'.format(x * 100)
-
 
                     ax.yaxis.set_major_formatter(mtick.FuncFormatter(percentage))
                     # add a percentage text at the top of the y-axis
@@ -249,14 +247,6 @@ if __name__ == '__main__':
                     # set the y-axis range
 
                     # ax.set_ylim(0, 0.055)
-
-                    # add a percentage sign on the top of the y-axis
-                    def percentage(x, pos):
-                        if x >= 0.2:
-                            return '{:.0f}%'.format(x * 100)
-                        else:
-                            return '{:.1f}%'.format(x * 100)
-
 
                     ax.yaxis.set_major_formatter(mtick.FuncFormatter(percentage))
                     # add a percentage text at the top of the y-axis

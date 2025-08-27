@@ -1,4 +1,4 @@
-# Lithium-ion Battery Calendar Ageing Model using Universal Differential Equations
+# Physics-informed neural network for lithium-ion battery degradation stable modeling and prognosis
 
 > [!IMPORTANT]
 I acknowledge that all ideas and codes presented here are derived from the study titled '**[Physics-informed neural network for lithium-ion battery degradation stable modeling and prognosis](https://www.nature.com/articles/s41467-024-48779-z)**' (2024). This code is created for **learning and practice purposes** only.
