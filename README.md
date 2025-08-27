@@ -151,7 +151,7 @@ To run the model, follow these steps:
 ### 1) NASA battery dataset
   This project uses the NASA lithium-ion battery dataset from the Prognostics Data.  
   It contains charge/discharge cycle data and is commonly used for battery degradation and State of Health (SOH) prediction.
-  Here, I used only charging data to keep the method in original paper.
+  Here, I used charging data to keep the method in original paper, and used discharging data for ICA.
   
   - Data available on https://www.kaggle.com/datasets/patrickfleith/nasa-battery-dataset.
 
