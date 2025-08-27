@@ -19,6 +19,50 @@ This repository replaces the XJTU dataset used in prior work with the **NASA Bat
 For further details, refer to the repository available at
 - Codes : https://github.com/wang-fujin/PINN4SOH.git.
 
+# **Incremental Capacity Analysis(ICA)**
+
+   **Incremental Capacity Analysis (ICA)** is the method to predict SOH through Incremental Capacity. The **Incremental capacity (IC)** is defined by the derivative of the capacity dQ with respect to the voltage dV.  
+   According to **[Incremental Capacity Analysis as a State of Health Estimation Method for Lithium-Ion Battery Modules with Series-Connected Cells](https://doi.org/10.3390/batteries7010002)** by Amelie Krupp et al., it is reported that the **features of ICA peaks (such as height, area, and position)** are closely correlated with SOH and can be used to estimate it.
+
+   <img width="1573" height="879" alt="ICA" src="https://github.com/user-attachments/assets/5f908a73-b6db-4a4b-abb6-4adfe6b7a7e4" />
+   
+   From this insight, I implemented preprocessing codes to add a new feature, `dV/dQ`, to the NASA dataset. For each cycle, the `dV/dQ` index is defined as the 99th percentile of the calculated `dV/dQ` values. I then retrained the model using the augmented dataset including this feature.
+
+## dQ/dV calculation
+
+We need to compute $\frac{dQ}{dV}$.
+
+First, the charge increment is defined as:
+
+$$
+\Delta Q = \int_{t_{n}}^{t_{n+1}} I(t) \ dt
+$$
+
+Then,
+
+$$
+\frac{dQ}{dt} \approx I(t_{n})
+$$
+
+Also, we can derive $\frac{dV}{dt}$ from the data.
+
+So,
+
+```math
+\begin{aligned}
+\frac{dQ}{dV}\Big|_{V=V(t_n)}
+&= \frac{dQ}{dt}\Big|_{t=t_n} \cdot \frac{dt}{dV}\Big|_{t=t_n} \\
+&= I(t_n) \cdot \left(\frac{dV}{dt}\Big|_{t=t_n}\right)^{-1}
+\end{aligned}
+```
+
+##
+
+The `dQ/dV` indexing of the NASA dataset is implemented in `datasplit.ipynb`.  
+The processed results and related figures can be found in the `results`, `results_analysis`, and `plotter` folders.
+
+Furthermore, model training with this dataset can be performed using `main_NASA_dqdv.py`.
+
 # **Usage Instructions**
 
 To run the model, follow these steps:
@@ -60,10 +104,15 @@ To run the model, follow these steps:
   ```
    python3 main_XJTU.py
    ```
+   If you want to train PINN model with **NASA dataset** with **`dQ/dV` index**, run `main_NASA_dqdv.py`.
+  ```
+   python3 main_NASA_dqdv.py
+   ```
   If you want to train other models (CNN, MLP), run `main_comparision.py`.
   ```bash
   # Usage : python3 main_comparision.py --model=<model> --dataset=<dataset>
-  # default = MLP, NASA
+  # default is MLP with NASA dataset.
+  # dataset should be one of ['NASA', 'XJTU', 'NASA_dqdv']
    python3 main_comparision.py --model=MLP --dataset=NASA
    ```
   The trained model and corresponding loss log files will be stored in the results_of_reviewer folder.
@@ -77,6 +126,10 @@ To run the model, follow these steps:
   To evaluate model with **XJTU dataset**, run `XJTU results.py`.
   ```
   python3 XJTU\ results.py
+  ```
+   To evaluate model with **NASA dataset** with **`dQ/dV` index**, run `NASA_dqdv results.py`.
+  ```
+  python3 NASA_dqdv\ results.py
   ```
   To evaluate other models (CNN, MLP), run 'Comparision results.py'
   ```bash
