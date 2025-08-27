@@ -47,6 +47,10 @@ numbers 1–17 represent 17 features, and feature 17 is `dV/dQ` value.**
 ### Comparision with Original NASA data
 > Compared MAE, MAPE, and RMSE of three models between the NASA dataset and the NASA_dQdV dataset.
 
+>[!Warning]
+>This comparison may be less meaningful, as the models trained on the NASA dataset use charging data, while those on the NASA_dQdV dataset use discharging data.
+
+
 <img width="3583" height="4815" alt="Compare" src="https://github.com/user-attachments/assets/1037db3e-d9e0-4816-a93c-e87beb5c919a" />
 
 **[Figure | MAE, MAPE, RMSE comparison of three models on NASA vs. NASA_dQdV.]** 
