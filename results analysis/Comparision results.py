@@ -16,7 +16,7 @@ import argparse
 
 def get_args():
     p = argparse.ArgumentParser()
-    p.add_argument('--dataset', type=str, required=True, choices=['NASA', 'XJTU'],
+    p.add_argument('--dataset', type=str, required=True, choices=['NASA', 'XJTU', 'NASA_dqdv'],
                    help='Choose dataset')
     p.add_argument('--model', type=str, default = 'MLP', choices=['CNN', 'MLP'],
                    help='Choose model to evaluate')
@@ -30,6 +30,21 @@ if __name__ == '__main__':
     if args.dataset == 'NASA':
         root = f'../results of reviewer/{args.model}/NASA results/' # "NASA-CNN results" or "NASA-MLP results"
         writer = pd.ExcelWriter(f'../results of reviewer/{args.model}-NASA-results.xlsx')
+        batch = 0
+        results = Results_NASA(root, gap=0.07)
+        for batch in range(1,10):
+            if batch == 4 or batch == 6:
+                continue
+            df_battery_mean = results.get_battery_average(train_batch=batch,test_batch=batch)
+            df_experiment_mean = results.get_experiments_mean(test_batch=batch,train_batch=batch)
+            df_battery_mean.to_excel(writer,sheet_name='battery_mean_{}'.format(batch),index=False)
+            df_experiment_mean.to_excel(writer,sheet_name='experiment_mean_{}'.format(batch),index=False)
+        writer.close()
+        print(df_experiment_mean.mean(numeric_only=True))
+
+    if args.dataset == 'NASA_dqdv':
+        root = f'../results of reviewer/{args.model}/NASA_dqdv results/' # "NASA-CNN results" or "NASA-MLP results"
+        writer = pd.ExcelWriter(f'../results of reviewer/{args.model}-NASA_dqdv-results.xlsx')
         batch = 0
         results = Results_NASA(root, gap=0.07)
         for batch in range(1,10):

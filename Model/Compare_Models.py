@@ -45,6 +45,17 @@ class MLP(nn.Module):
         x = self.predictor(x)
         return x
 
+class MLP_dqdv(nn.Module):
+    def __init__(self):
+        super(MLP_dqdv, self).__init__()
+        self.encoder = Encoder(input_dim=18, output_dim=34, layers_num=3, hidden_dim=60, droupout=0.2)
+        self.predictor = Predictor(input_dim=34)
+
+    def forward(self,x):
+        x = self.encoder(x)
+        x = self.predictor(x)
+        return x
+
 
 class CNN(nn.Module):
     def __init__(self):

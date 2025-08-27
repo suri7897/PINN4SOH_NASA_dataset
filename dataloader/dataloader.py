@@ -333,7 +333,7 @@ class TJUdata(DF):
     
 
 class NASAdata(DF):
-    def __init__(self, root='NASA_dataset/battery_splited', args=None):
+    def __init__(self, root='../data/NASA data', args=None):
         super(NASAdata,self).__init__(args)
         self.root = root
 

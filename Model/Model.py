@@ -62,10 +62,10 @@ class Predictor(nn.Module):
         return self.net(x)
 
 class Solution_u(nn.Module):
-    def __init__(self):
+    def __init__(self, input_dim=17):
         super(Solution_u, self).__init__()
-        self.encoder = MLP(input_dim=17,output_dim=32,layers_num=3,hidden_dim=60,droupout=0.2)
-        self.predictor = Predictor(input_dim=32)
+        self.encoder = MLP(input_dim=input_dim,output_dim=2*input_dim - 2,layers_num=3,hidden_dim=60,droupout=0.2)
+        self.predictor = Predictor(input_dim=2*input_dim - 2)
         self._init_()
 
     def get_embedding(self,x):
@@ -84,6 +84,7 @@ class Solution_u(nn.Module):
             elif isinstance(layer,nn.Conv1d):
                 nn.init.xavier_normal_(layer.weight)
                 nn.init.constant_(layer.bias,0)
+
 
 
 def count_parameters(model):
@@ -125,7 +126,7 @@ class LR_Scheduler(object):
 
 
 class PINN(nn.Module):
-    def __init__(self,args):
+    def __init__(self,args, dqdv=False):
         super(PINN, self).__init__()
         self.args = args
         if args.save_folder is not None and not os.path.exists(args.save_folder):
@@ -133,12 +134,19 @@ class PINN(nn.Module):
         log_dir = args.log_dir if args.save_folder is None else os.path.join(args.save_folder, args.log_dir)
         self.logger = get_logger(log_dir)
         self._save_args()
+        if dqdv:
+            self.solution_u = Solution_u(input_dim=18).to(device)
+            self.dynamical_F = MLP(input_dim=37,output_dim=1,
+                        layers_num=args.F_layers_num,
+                        hidden_dim=args.F_hidden_dim,
+                        droupout=0.2).to(device)
+        else:
+            self.solution_u = Solution_u(input_dim=17).to(device)
+            self.dynamical_F = MLP(input_dim=35,output_dim=1,
+                        layers_num=args.F_layers_num,
+                        hidden_dim=args.F_hidden_dim,
+                        droupout=0.2).to(device)
 
-        self.solution_u = Solution_u().to(device)
-        self.dynamical_F = MLP(input_dim=35,output_dim=1,
-                               layers_num=args.F_layers_num,
-                               hidden_dim=args.F_hidden_dim,
-                               droupout=0.2).to(device)
 
         # self.optimizer = torch.optim.Adam(self.parameters(), lr=args.warmup_lr)
         self.optimizer1 = torch.optim.Adam(self.solution_u.parameters(), lr=args.warmup_lr)
@@ -154,7 +162,6 @@ class PINN(nn.Module):
         self.loss_func = nn.MSELoss()
         self.relu = nn.ReLU()
 
-        # 模型的最好参数(the best model)
         self.best_model = None
 
         # loss = loss1 + alpha*loss2 + beta*loss3
@@ -163,7 +170,6 @@ class PINN(nn.Module):
 
     def _save_args(self):
         if self.args.log_dir is not None:
-            # 中文： 把parser中的参数保存在self.logger中
             # English: save the parameters in parser to self.logger
             self.logger.info("Args:")
             for k, v in self.args.__dict__.items():

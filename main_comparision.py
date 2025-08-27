@@ -3,7 +3,7 @@ import torch.nn as nn
 import numpy as np
 import os
 from utils.util import AverageMeter,get_logger
-from Model.Compare_Models import MLP,CNN
+from Model.Compare_Models import MLP,CNN, MLP_dqdv
 from Model.Model import LR_Scheduler
 from dataloader.dataloader import XJTUdata,HUSTdata,MITdata,TJUdata,NASAdata
 import argparse
@@ -111,9 +111,12 @@ class Trainer():
         self.clear_logger()
 
 
-def load_model(args):
+def load_model(args, dqdv=False):
     if args.model == 'MLP':
-        model = MLP()
+        if dqdv:
+            model = MLP_dqdv()
+        else:
+            model = MLP()
     elif args.model == 'CNN':
         model = CNN()
     return model
@@ -140,8 +143,13 @@ def load_XJTU_data(args,small_sample=None):
                   'test': test_loader['test_3']}
     return dataloader
 
-def load_NASA_data(args, small_sample=None):
-    root = 'data/NASA data'
+def load_NASA_data(args, small_sample=None, dqdv=False):
+    if dqdv:
+        root = 'data/NASA data_dqdv'
+        datatype = 'discharge'
+    else:
+        root = 'data/NASA data'
+        datatype = 'charge'
     data = NASAdata(root=root, args=args)
     train_list, test_list = [], []
 
@@ -158,7 +166,7 @@ def load_NASA_data(args, small_sample=None):
         assert dataset_dir is not None, f"Dataset directory for batch {batch_num} not found."
 
         for battery_id in battery_ids:
-            filename = f'B{battery_id:04d}_charge_summary.csv'
+            filename = f'B{battery_id:04d}_{datatype}_summary.csv'
             path = os.path.join(dataset_dir, filename)
             if battery_id % 10 in [5, 9]:
                 test_list.append(path)
@@ -185,7 +193,7 @@ def load_NASA_data(args, small_sample=None):
 def get_args():
     parser = argparse.ArgumentParser('The parameters of Comparision methods')
     parser.add_argument('--model',type=str,default='MLP',choices=['MLP','CNN'])
-    parser.add_argument('--dataset',type=str,default='NASA',choices=['XJTU','NASA'])
+    parser.add_argument('--dataset',type=str,default='NASA',choices=['XJTU','NASA', 'NASA_dqdv'])
     parser.add_argument('--normalization_method',type=str, default='min-max', help='min-max,z-score')
 
     # XJTU data
@@ -232,6 +240,21 @@ if __name__ == '__main__':
                 os.makedirs(save_folder, exist_ok=True)
                 dataloader = load_NASA_data(args)
                 model = load_model(args)
+                trainer = Trainer(model, dataloader['train'], dataloader['valid'], dataloader['test'], args)
+                trainer.train()
+        print(f"{args.model} Training with {args.dataset} finished.")
+    
+    if args.dataset == 'NASA_dqdv' :
+        setattr(args, 'in_same_batch', True)
+
+        for batch in range(1, 10):  # Batch_1 ~ Batch_9
+            setattr(args, 'batch', batch)
+            for e in range(10):
+                save_folder = f'./results of reviewer/{args.model}/NASA_dqdv results/{batch}-{batch}/Experiment{e+1}'
+                setattr(args, 'save_folder', save_folder)
+                os.makedirs(save_folder, exist_ok=True)
+                dataloader = load_NASA_data(args, dqdv=True)
+                model = load_model(args, dqdv = True)
                 trainer = Trainer(model, dataloader['train'], dataloader['valid'], dataloader['test'], args)
                 trainer.train()
         print(f"{args.model} Training with {args.dataset} finished.")

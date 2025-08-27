@@ -60,7 +60,8 @@ with plt.rc_context({'text.usetex': False}):
                     'MIT':[0.79,1.005],
                     'XJTU':[0.79,1.005],
                     'TJU':[0.69,0.97],
-                    'NASA':[0.3,1.005]
+                    'NASA_1':[0.3,0.75],
+                    'NASA_2' : [0.7,1.005]
                     }
             # plot
             #fig = plt.figure(figsize=(3,2.6),dpi=200)
@@ -77,6 +78,14 @@ with plt.rc_context({'text.usetex': False}):
 
             ax.set_xticks([0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1])
             ax.set_yticks([0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1])
+            if data in ["XJTU", "TJU", "MIT", "MIT"]:
+                lim = lims[data]
+            else :
+                if batch in [7,8,9]:
+                    lim = lims["NASA_1"]
+                else:
+                    lim = lims["NASA_2"]
+
             ax.set_xlim(lims[data])
             ax.set_ylim(lims[data])
             #plt.suptitle(title)
