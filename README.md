@@ -26,7 +26,7 @@ For further details, refer to the repository available at
 
    <img width="1573" height="879" alt="ICA" src="https://github.com/user-attachments/assets/5f908a73-b6db-4a4b-abb6-4adfe6b7a7e4" />
    
-   From this insight, I implemented preprocessing codes to add a new feature, `dV/dQ`, to the NASA dataset. For each cycle, the `dV/dQ` index is defined as the 99th percentile of the calculated `dV/dQ` values. I then retrained the model using the augmented dataset including this feature.
+   From this insight, I additionally implemented preprocessing codes to add a new feature, `dV/dQ`, to the NASA dataset. For each cycle, the `dV/dQ` index is defined as the 99th percentile of the calculated `dV/dQ` values. I then retrained the model using the augmented dataset including this feature.
 
 ## dQ/dV calculation
 
