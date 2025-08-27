@@ -48,6 +48,10 @@ $$
 
 Also, we can derive $\frac{dV}{dt}$ from the data.
 
+$$
+\frac{dV}{dt} \approx \frac{V_{n+1} - V_{n}}{t_{n+1} - t_{n}}
+$$
+
 So,
 
 ```math
