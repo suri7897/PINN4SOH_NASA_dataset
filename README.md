@@ -141,7 +141,7 @@ To run the model, follow these steps:
   ```bash
   # Usage : python3 Comparision\ results.py --model=<model> --dataset=<dataset>
   # default = MLP, dataset is required argument
-   python3 main_comparision.py --model=MLP --dataset=NASA
+   python3 Comparision\ results.py --model=MLP --dataset=NASA
    ```
    This codes generate the evaluating errors in the format of xlsx file. At the same time, the results of each batch will also be printed on the Command Console.
    
