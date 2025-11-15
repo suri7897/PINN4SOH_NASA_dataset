@@ -25,20 +25,23 @@ numbers 1–17 represent 17 features, and feature 17 is `dV/dQ` value.**
 ### Figure 4a
 > The SOH estimation results of proposed PINN on four datasets. If predicted and true SOH are distributed near the diagonal, it indicates that the model performs well.
 
-<img width="1064" height="886" alt="Figure 4a_NASA_dqdv" src="https://github.com/user-attachments/assets/7578ecb2-6dcf-4fa9-9431-edc0aa5eaa38" />
+<img width="1060" height="883" alt="Figure 4a_dqdv" src="https://github.com/user-attachments/assets/831f9ab6-d476-4b00-a649-26c61783c88a" />
+
 
 ##
 
 ### Figure 4b
 > Distributions of mean absolute error (MAE), mean absolute percentage error (MAPE), and root mean square error (RMSE) of 3 models (the proposed PINN (Ours), multi-layer perceptron (MLP), and convolutional neural network (CNN)) on four datasets.
 
-<img width="1816" height="1058" alt="Figure 4b_dqdv" src="https://github.com/user-attachments/assets/19049a0c-2068-49e9-9f0e-e7f62ec7d906" />
+<img width="1818" height="1058" alt="Figure 4b_dqdv" src="https://github.com/user-attachments/assets/a5e03894-c72a-41e2-b18a-aa77e0e461e4" />
+
 
 **[Figure 4b | Reproduced figure with NASA_dqdv data]** 
 
 <br>
 
-<img width="1817" height="1058" alt="Figure 4b_dqdv_wo_CNN" src="https://github.com/user-attachments/assets/b5a99255-c024-4115-9fd6-9737a9f372ea" />
+<img width="1817" height="1058" alt="Figure 4b_dqdv_wo_CNN" src="https://github.com/user-attachments/assets/19728247-33df-4ce7-b417-cc54d77a31e4" />
+
 
 **[Figure 4b | Reproduced figure without CNN data]** 
 
@@ -48,7 +51,8 @@ numbers 1–17 represent 17 features, and feature 17 is `dV/dQ` value.**
 > Compared MAE, MAPE, and RMSE of three models between the NASA dataset and the NASA_dQdV dataset.
 
 
-<img width="3583" height="4815" alt="Compare" src="https://github.com/user-attachments/assets/1037db3e-d9e0-4816-a93c-e87beb5c919a" />
+<img width="3581" height="4815" alt="comparision" src="https://github.com/user-attachments/assets/e30c81f5-5556-4c16-8d3c-a30ec1e567be" />
+
 
 **[Figure | MAE, MAPE, RMSE comparison of three models on NASA vs. NASA_dQdV.]** 
 > The analysis shows that the dQ/dV dataset leads to higher errors (MAE, MAPE, RMSE) compared to the original NASA dataset, indicating that models perform better on the original data.
